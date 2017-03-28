@@ -4,6 +4,7 @@ use App\Logic\AdminLogic;
 use App\Logic\DistributePrivilegeLogic;
 use App\Logic\PrivilegeLogic;
 use Core\BaseController;
+use Core\CheckPrivilegePerAccess;
 use Core\PubFunc;
 
 /**
@@ -46,10 +47,19 @@ class PreController extends BaseController
                 PubFunc::logOut();
                 $this->toTip('查询用户信息错误或者用户已被禁用',HTTP_DOMAIN.'/'.MANAGE_ACCESS_NAME);exit;
             }
+            $uri = strtolower(trim(PATH,'/'));
+            $chkResult = CheckPrivilegePerAccess::chkPrivilegeByUriAndAdminID($uri,$admin_id);
+            if($chkResult['status']==2)
+            {
+                if(\Core\PubFunc::isAjax())
+                {
+                    echo json_encode(\Core\PubFunc::returnArray(2,false,$chkResult['msg']));exit;
+                }
+                $this->toTip($chkResult['msg'],HTTP_DOMAIN.'/adminmain');exit;
+            }
 
         }
         //echo 'action before controller';
         //记录每次操作日志
     }
-
 }
