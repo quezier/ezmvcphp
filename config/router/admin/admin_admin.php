@@ -4,7 +4,7 @@ return array(
         'method' => 'GET',
         'rank_num'=>2,
         'privilege_name'=>'管理员管理',
-        'parent_privilege_name'=>'系统权限管理',
+        'parent_privilege_name'=>'系统管理',
         'privilege_type'=>1,
         'call' => 'Admin/Admin/toAdminList'
     ),

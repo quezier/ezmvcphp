@@ -24,10 +24,10 @@
             <a class="blog-nav-item <?php if(empty($is_login)){echo 'active';}?>" href="<?php echo HTTP_DOMAIN;?>/">Home</a>
             <?php if(empty($_SESSION['user_name'])){?>
             <a class="blog-nav-item "
-               href="https://<?php echo \Core\PubFunc::sysConfig('public_login_url').'/returnurl/'.HTTP_HOST;?>">登录</a>
+               href="javascript:void(0)">登录</a>
             <?php }else{?>
                 <a class="blog-nav-item "
-                   href="https://<?php echo \Core\PubFunc::sysConfig('public_logout_url').'/returnurl/'.HTTP_HOST;?>">注销</a>
+                   href="javascript:void(0)">注销</a>
             <?php }?>
             <form action="<?php echo HTTP_DOMAIN;?>/indexsearch" method="GET" class="navbar-form navbar-right">
                 <div class="form-group">

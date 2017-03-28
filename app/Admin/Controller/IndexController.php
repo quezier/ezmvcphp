@@ -60,7 +60,7 @@ class IndexController extends BaseController
                         {
                             echo json_encode(PubFunc::returnArray('2', '', '更新登录数据错误！'));exit;
                         }
-                        
+
                         PubFunc::session('admin_id', $result['result']['id']);
                         PubFunc::session('admin_name', $result['result']['name']);
 

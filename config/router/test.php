@@ -1,21 +1,5 @@
 <?php
 return array(
-    'testuser'=>array(
-        'method'=>'GET',
-        'call'=>'Test/UserInfoTest/index'
-    ),
-    'testorders'=>array(
-        'method'=>'GET',
-        'call'=>'Test/OrdersTest/index'
-    ),
-    'testpage'=>array(
-        'method'=>'GET',
-        'call'=>'Test/UserInfoTest/page'
-    ),
-    'testaddadmin'=>array(
-        'method'=>'GET',
-        'call'=>'Test/TestAdmin/insert'
-    ),
     'testcreatepri'=>array(
         'method'=>'GET',
         'call'=>'Test/CreatePrivileges/index'

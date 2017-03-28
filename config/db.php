@@ -6,9 +6,9 @@
  */
 return array(
     'dbType'=>'mysql',
-    'dbHost'=>'',
-    'dbName'=>'',
-    'dbUserName'=>'',
-    'dbPwd'=>'',
+    'dbHost'=>'127.0.0.1',
+    'dbName'=>'ezmvcphp',
+    'dbUserName'=>'root',
+    'dbPwd'=>'root',
     'recordsPerPage'=>10,//每页记录数，用于分页
 );
