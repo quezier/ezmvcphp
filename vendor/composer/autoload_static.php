@@ -6,7 +6,19 @@ namespace Composer\Autoload;
 
 class ComposerStaticInit85186c3678d1cc56f87de37b19a109e4
 {
+    public static $files = array (
+        '3a37ebac017bc098e9a86b35401e7a68' => __DIR__ . '/..' . '/mongodb/mongodb/src/functions.php',
+    );
+
     public static $prefixLengthsPsr4 = array (
+        'P' => 
+        array (
+            'Predis\\' => 7,
+        ),
+        'M' => 
+        array (
+            'MongoDB\\' => 8,
+        ),
         'C' => 
         array (
             'Core\\' => 5,
@@ -18,6 +30,14 @@ class ComposerStaticInit85186c3678d1cc56f87de37b19a109e4
     );
 
     public static $prefixDirsPsr4 = array (
+        'Predis\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/predis/predis/src',
+        ),
+        'MongoDB\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/mongodb/mongodb/src',
+        ),
         'Core\\' => 
         array (
             0 => __DIR__ . '/..' . '/quezier/ezusephp-core',
