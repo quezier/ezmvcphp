@@ -422,4 +422,11 @@ content="0;url='.$url.'"><title>loading ... </title></head><body>
         $_SESSION = array();
         session_destroy();
     }
+	/**
+     * 输出utf-8中文
+     */
+    static function headerUTFEIGHT()
+    {
+        header("Content-type: text/html; charset=utf-8");
+    }
 }
