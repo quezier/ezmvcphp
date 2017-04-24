@@ -429,4 +429,82 @@ content="0;url='.$url.'"><title>loading ... </title></head><body>
     {
         header("Content-type: text/html; charset=utf-8");
     }
+
+    /**去随机红包
+     * @param $proArr
+     * @return int|string
+     */
+    static function get_arr_rand($proArr) {
+        $result = '';
+        $proSum = array_sum($proArr);
+        foreach ($proArr as $key =>$proCur) {
+            $randNum = mt_rand(1,$proSum);
+            if ($randNum <= $proCur) {
+                $result = $key;
+                break;
+            }else {
+                $proSum -= $proCur;
+            }
+        }
+        unset ($proArr);
+        return $result;
+    }
+
+    /**
+     * curl执行post发送数据
+     * @param string $url 配置值
+     * @param string|array $data 默认值
+     * @param bool $isSSL 是否使用https,默认是false
+     * @return string
+     */
+    static function curlPost($url,$data,$isSSL=false){
+        if(empty($url) || empty($data))return false;
+        //if(is_array($data))$data=http_build_query($data);
+        $re=curl_init();//实例化cURL
+        curl_setopt($re, CURLOPT_SSL_VERIFYPEER, $isSSL);
+        curl_setopt($re, CURLOPT_SSL_VERIFYHOST, $isSSL);
+        curl_setopt($re, CURLOPT_HEADER, 0);//0关闭打印相应头,直接打印需为1,
+        curl_setopt($re, CURLOPT_RETURNTRANSFER, 1);//0获取后直接打印出来
+        curl_setopt($re, CURLOPT_URL, $url);//初始化路径
+        curl_setopt($re, CURLOPT_POST, 1);//启用时会发送一个常规的POST请求，
+        curl_setopt($re, CURLOPT_POSTFIELDS, $data);//使用HTTP协议中的"POST"操作来发送的数据
+        $result=curl_exec($re);//执行一个cURL会话,返回响应结果
+
+        if(curl_errno($re)==0){
+            curl_close($re);//关闭cURL会话
+            return $result;
+        }else {
+            curl_close($re);//关闭cURL会话
+            return false;
+        }
+    }
+
+    /**
+     * curl执行get发送数据
+     * @param string $url 配置值
+     * @param string|array $data 默认值
+     ** @param bool $isSSL 是否使用https,默认是false
+     * @return string
+     */
+    static function curlGet($url,$data,$isSSL=false){
+        if(empty($url) || empty($data))return false;
+        if(is_array($data))$data=http_build_query($data);
+        $url=$url.'?'.$data;
+        $re=curl_init();//实例化cURL
+        curl_setopt($re, CURLOPT_SSL_VERIFYPEER, $isSSL);
+        curl_setopt($re, CURLOPT_SSL_VERIFYHOST, $isSSL);
+        curl_setopt($re, CURLOPT_HEADER, 0);//0关闭打印相应头,直接打印需为1,
+        curl_setopt($re, CURLOPT_RETURNTRANSFER, 1);//0获取后直接打印出来
+        curl_setopt($re, CURLOPT_URL, $url);//初始化路径
+        $result=curl_exec($re);//执行一个cURL会话,返回响应结果
+
+        if(curl_errno($re)==0){
+            curl_close($re);//关闭cURL会话
+            return $result;
+        }else {
+            curl_close($re);//关闭cURL会话
+            return false;
+        }
+    }
+
 }
