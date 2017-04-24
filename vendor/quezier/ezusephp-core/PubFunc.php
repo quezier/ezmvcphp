@@ -394,16 +394,22 @@ content="0;url='.$url.'"><title>loading ... </title></head><body>
      */
     static function getQrcode($str,$path='',$outPath='')
     {
-        $qrcodeFileName = date('YmdHms',time()).CreateUniqueNo::createUniqueNo().'.png';
+        $nowTime = time();
+        $qrcodeFileName = date('YmdHms',$nowTime).CreateUniqueNo::createUniqueNo().'.png';
+        $folder = PROJECT_ROOT.DIR_SP.'public'.DIR_SP.'images'.DIR_SP.'qrcode'.DIR_SP.date('Ymd',$nowTime);
+        if(!file_exists($folder))
+        {
+            mkdir($folder,0777);
+        }
         if(empty($path))
         {
-            $path = PROJECT_ROOT.DIR_SP.'public'.DIR_SP.'images'.DIR_SP.'qrcode'.DIR_SP.$qrcodeFileName;
+            $path = $folder.DIR_SP.$qrcodeFileName;
         }
 
         QRcode::png($str,$path,'L',4,2);
         if(empty($outPath))
         {
-            $outPath = 'qrcode/'.$qrcodeFileName;
+            $outPath = date('Ymd',$nowTime).DIR_SP.$qrcodeFileName;
         }
         return $outPath;
     }
@@ -507,4 +513,32 @@ content="0;url='.$url.'"><title>loading ... </title></head><body>
         }
     }
 
+    /**
+     * 输出日志
+     * @param $content 内容
+     * @param int $type 类型 1:文件
+     * @param string $fileName 日志文件名称
+     * @return bool
+     */
+    static function doLog($content,$type=1,$fileName='logs.txt')
+    {
+        try{
+            if($type==1)
+            {
+                $folderPath=PROJECT_ROOT.'/logs';
+                if(!file_exists($folderPath))
+                {
+                    mkdir($folderPath,0777);
+                }
+                $content.=date('Y-m-d H:i:s',time()).'  '.$content."\r\n";
+                file_put_contents($folderPath.'/'.$fileName,$content,FILE_APPEND);
+                return true;
+            }
+        }
+        catch (\Exception $e)
+        {
+            return false;
+        }
+
+    }
 }
