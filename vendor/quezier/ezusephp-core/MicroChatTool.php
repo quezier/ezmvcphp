@@ -7,6 +7,7 @@
  */
 
 namespace Core;
+use App\Logic\LevelSettingLogic;
 use App\Logic\UserInfoLogic;
 /**
  * 微信工具类
@@ -23,13 +24,21 @@ class MicroChatTool
         try{
             $code=$_GET['code'];
             $state=$_GET['state'];
+            if(!empty($state))
+            {
+                $stateArray = explode('|',$state);
+                if(!empty($stateArray[1]))
+                {
+                    $plzcode = $stateArray[1];
+                }
+            }
             if(empty($code))
             {
                 return PubFunc::returnArray(2,false,'获取code失败');
             }
             $wxConfig = PubFunc::sysConfig('wei_xin');
 
-            if(empty($state)||$state!=$wxConfig['state_msg'])
+            if(empty($state)||$stateArray[0]!=$wxConfig['state_msg'])
             {
                 return PubFunc::returnArray(2,false,'state错误');
             }
@@ -81,6 +90,35 @@ class MicroChatTool
                         $data['reg_date']= $newTime;
                         $data['user_level']=1;
                         $data['reg_ip']=PubFunc::getIP();
+                        $plzcode = intval($plzcode);
+                        if(!empty($plzcode))
+                        {
+                            $levelSettingLogic = new LevelSettingLogic();
+                            $levelSettingResult = $levelSettingLogic->getOne(''," limit 0,1 ");
+                            if($levelSettingResult['status']==1&&!empty($levelSettingResult['result']))
+                            {
+                                $levelSetting = $levelSettingResult['result'];
+                            }
+                            $countResult = $userInfoLogic->sql("select count(*) as num from user_info where parent_id=:pid",array('pid'=>$plzcode));
+                            //var_dump($levelSettingResult);var_dump($countResult);exit;
+                            if($countResult['status']==1&&!empty($countResult['result']))
+                            {
+                                $count = $countResult['result'][0]['num'];
+                                if($count>=$levelSetting['second_number']&&$count<$levelSetting['third_number'])
+                                {
+                                    $parentData['id']=$plzcode;
+                                    $parentData['user_level']=2;
+                                    $userInfoLogic->update($parentData);
+                                }
+                                elseif ($count>=$levelSetting['third_number'])
+                                {
+                                    $parentData['id']=$plzcode;
+                                    $parentData['user_level']=3;
+                                    $userInfoLogic->update($parentData);
+                                }
+                            }
+                            $data['parent_id']=$plzcode;
+                        }
 
                         if(!empty($headImgUrl))
                         {
@@ -107,7 +145,7 @@ class MicroChatTool
                             PubFunc::session('user_id',$userID);
                             PubFunc::session('user_name',$nickname);
                             PubFunc::session('user_logo',$headImgUrl);
-                            $pleaseCode = HTTP_DOMAIN.'/plzcode/'.$userID;
+                            $pleaseCode = HTTP_DOMAIN.'/?plzcode='.$userID;
                             $invitationCodePath = PubFunc::getQrcode($pleaseCode);
                             if(!empty($invitationCodePath))
                             {
