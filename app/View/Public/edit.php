@@ -55,13 +55,15 @@
                                                 <div class="col s10">
                                                     <?php if($afVal['type']=='text'){?>
                                                     <input id="<?php echo $afKey;?>" name="<?php echo $afKey;?>"
-                                                           class="<?php if(empty($afVal['no_use'])){ echo ' validate[required] '; }?>"
+                                                           class="<?php if(!empty($afVal['validate'])){ echo " ".$afVal['validate']." "; }elseif(empty($afVal['validate'])||empty($afVal['no_use'])){echo " validate[required] ";}?>"
                                                            <?php if(!empty($afVal['value'])){echo ' value="'.$afVal['value'].'"';}else{echo ' value="'.$tableObject[$afKey].'"';}?>
                                                         <?php if(!empty($afVal['no_use'])){ echo ' readonly="readonly" '; }?>
                                                            type="text" placeholder="<?php echo $afVal['cn_name'];?>">
                                                     <?php }else if($afVal['type']=='select'){?>
                                                         <div class="hh-select  select-wrapper">
-                                                            <select id="<?php echo $afKey;?>" name="<?php echo $afKey;?>" class="myselect validate[required] select2-selection--single select2-search--dropdown" >
+                                                            <select id="<?php echo $afKey;?>" name="<?php echo $afKey;?>" class="myselect
+                                                            <?php if(!empty($afVal['validate'])){ echo " ".$afVal['validate']." "; }else{echo " validate[required] ";}?>
+                                                            select2-selection--single select2-search--dropdown" >
                                                                 <option value="" >请选择</option>
                                                                 <?php foreach ($afVal['list'] as $lkey => $lval){?>
                                                                     <option
@@ -73,16 +75,18 @@
                                                     <?php }else if($afVal['type']=='checkbox'){?>
                                                         <div class="hh-checkbox clearfix">
                                                             <?php foreach ($afVal['list'] as $chkKey => $chkVal){?>
-                                                                <input class="filled-in validate[required]"
+                                                                <input class="filled-in
+                                                                <?php if(!empty($afVal['validate'])){ echo " ".$afVal['validate']." "; }else{echo " validate[required] ";}?>"
                                                                        <?php if($chkKey == $tableObject[$afKey]){echo " checked='checked' ";}?>
                                                                        value="<?php echo $chkKey;?>" id="<?php echo $afKey;?>_<?php echo $chkKey;?>" type="checkbox" name="<?php echo $afKey;?>">
                                                                 <label for="<?php echo $afKey;?>_<?php echo $chkKey;?>"><?php echo $chkVal;?></label>
                                                             <?php }?>
                                                         </div>
                                                     <?php }else if($afVal['type']=='radio'){?>
-                                                        <div class="hh-checkbox clearfix validate[required]">
+                                                        <div class="hh-checkbox clearfix">
                                                             <?php foreach ($afVal['list'] as $radioKey => $radioVal){?>
-                                                                <input class="with-gap"
+                                                                <input class="with-gap
+                                                                <?php if(!empty($afVal['validate'])){ echo " ".$afVal['validate']." "; }else{echo " validate[required] ";}?>"
                                                                     <?php if($radioKey == $tableObject[$afKey]){echo " checked='checked' ";}?>
                                                                        value="<?php echo $radioKey;?>" id="<?php echo $afKey;?>_<?php echo $radioKey;?>" type="radio" name="<?php echo $afKey;?>">
                                                                 <label  for="<?php echo $afKey;?>_<?php echo $radioKey;?>"><?php echo $radioVal;?></label>
@@ -91,7 +95,9 @@
                                                     <?php }else if($afVal['type']=='date'){?>
                                                     <input placeholder="<?php echo $afVal['cn_name'];?>"
                                                            value="<?php echo $tableObject[$afKey];?>"
-                                                           name="<?php echo $afKey;?>" id="<?php echo $afKey;?>" type="text" class="validate[required] datepicker">
+                                                           name="<?php echo $afKey;?>" id="<?php echo $afKey;?>" type="text" class="
+                                                            <?php if(!empty($afVal['validate'])){ echo " ".$afVal['validate']." "; }else{echo " validate[required] ";}?>
+                                                            datepicker">
 
                                                     <?php }else if($afVal['type']=='editor'){?>
 

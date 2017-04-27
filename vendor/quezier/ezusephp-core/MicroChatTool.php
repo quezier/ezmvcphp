@@ -75,6 +75,7 @@ class MicroChatTool
                         PubFunc::session('user_id',$userArr['id']);
                         PubFunc::session('user_name',$userArr['username']);
                         PubFunc::session('user_logo',$userArr['user_logo']);
+                        PubFunc::session('user_wx_openid',$openid);
                         $updData['login_ip']=PubFunc::getIP();
                         $updData['login_date']=time();
                         $updData['id']=$userArr['id'];
@@ -145,6 +146,7 @@ class MicroChatTool
                             PubFunc::session('user_id',$userID);
                             PubFunc::session('user_name',$nickname);
                             PubFunc::session('user_logo',$headImgUrl);
+                            PubFunc::session('user_wx_openid',$openid);
                             $pleaseCode = HTTP_DOMAIN.'/?plzcode='.$userID;
                             $invitationCodePath = PubFunc::getQrcode($pleaseCode);
                             if(!empty($invitationCodePath))
