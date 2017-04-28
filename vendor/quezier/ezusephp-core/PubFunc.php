@@ -406,7 +406,7 @@ content="0;url='.$url.'"><title>loading ... </title></head><body>
             $path = $folder.DIR_SP.$qrcodeFileName;
         }
 
-        QRcode::png($str,$path,'L',4,2);
+        QRcode::png($str,$path,'L',11,2);
         if(empty($outPath))
         {
             $outPath = date('Ymd',$nowTime).DIR_SP.$qrcodeFileName;

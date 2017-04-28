@@ -33,7 +33,7 @@ class ImageSaveRemote
                 mkdir($filePath,0777,true);
             }
             //文件大小
-            $fp2=@fopen($filePath.DIR_SP.$fileName,'a');
+            $fp2=fopen($filePath.DIR_SP.$fileName,'a');
             fwrite($fp2,$img);
             fclose($fp2);
             unset($img);
@@ -41,6 +41,7 @@ class ImageSaveRemote
         }
         catch (\Exception $e)
         {
+
             return false;
         }
 
