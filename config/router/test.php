@@ -19,5 +19,9 @@ return array(
     'testimpexc'=>array(
         'method'=>'GET',
         'call'=>'Test/ImportExcel/index'
+    ),
+    'testaliyunmsg'=>array(
+        'method'=>'GET',
+        'call'=>'Test/TestMsg/index'
     )
 );

@@ -26,6 +26,7 @@ class ComposerStaticInit85186c3678d1cc56f87de37b19a109e4
         'A' => 
         array (
             'App\\' => 4,
+            'Aliyun\\' => 7,
         ),
     );
 
@@ -45,6 +46,10 @@ class ComposerStaticInit85186c3678d1cc56f87de37b19a109e4
         'App\\' => 
         array (
             0 => __DIR__ . '/../..' . '/app',
+        ),
+        'Aliyun\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/aliyun_msg_api',
         ),
     );
 

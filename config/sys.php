@@ -41,5 +41,11 @@ return array(
     'allow_host'=>array(
         'www.test.bs',
         'www.api.bs'
+    ),
+    'ALIYUN_MSG'=>array(
+        'ID'=>'',
+        'SECRET'=>'',
+        'SIGN_NAME'=>''
     )
+
 );
