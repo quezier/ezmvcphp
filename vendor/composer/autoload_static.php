@@ -49,7 +49,7 @@ class ComposerStaticInit85186c3678d1cc56f87de37b19a109e4
         ),
         'Aliyun\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/aliyun_msg_api',
+            0 => __DIR__ . '/../..' . '/app/Aliyunmsgapi',
         ),
     );
 

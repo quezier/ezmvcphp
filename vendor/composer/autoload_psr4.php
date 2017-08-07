@@ -10,5 +10,5 @@ return array(
     'MongoDB\\' => array($vendorDir . '/mongodb/mongodb/src'),
     'Core\\' => array($vendorDir . '/quezier/ezusephp-core'),
     'App\\' => array($baseDir . '/app'),
-    'Aliyun\\' => array($baseDir . '/aliyun_msg_api'),
+    'Aliyun\\' => array($baseDir . '/app/Aliyunmsgapi'),
 );
